@@ -64,7 +64,11 @@ class ViewController: UIViewController {
     }
     @IBAction func CameraButton(_ sender: Any) {
         let picker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            picker.sourceType = .camera
+        }else {
         picker.sourceType = .photoLibrary
+        }
         present(picker, animated: true)
         picker.delegate = self
     }
@@ -294,6 +298,7 @@ class ViewController: UIViewController {
         cancelbutton.isHidden = true
         ExplainButton.isEnabled = false
         ExplainButton.isHidden = true
+        
         view.layer.addSublayer(overlayLayer)
     }
 
