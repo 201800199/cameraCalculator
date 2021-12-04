@@ -7,6 +7,8 @@
 
 import UIKit
 import Vision
+//import MathParser
+import Expression
 
 class ViewController: UIViewController {
 
@@ -20,7 +22,10 @@ class ViewController: UIViewController {
     var imageH:CGFloat = 0
     let overlayLayer = CALayer();
     
+    var  recognizedWords:[String] = [String]()
+    var recognizedRegion:String = String()
     
+    let validCharacters: Set = .init("0123456789-+*/()^.")
     
     
     @IBOutlet weak var displayAll: UILabel!
@@ -28,14 +33,35 @@ class ViewController: UIViewController {
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var everything: UIStackView!
     @IBOutlet weak var cancelbutton: UIButton!
+    @IBOutlet weak var ExplainButton: UIButton!
     //@IBOutlet weak var IVHconstraint: NSLayoutConstraint!
+    
+    
     @IBAction func ReturnfromPic(_ sender: Any) {
+        hideImageV()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let text1 = displayAll.text else {return}
+        guard let text2 = displayLabel.text else {return}
+        let target = segue.destination as! ExplainViewController
+        target.equation = text1 + " = " + text2
+    }
+    
+    @IBAction func unwindToVC(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
+    func hideImageV(){
         ImageView.isHidden = true
         everything.isHidden = false
         cancelbutton.isEnabled = false
+        cancelbutton.isHidden = true
+        ImageView.subviews.forEach{ $0.removeFromSuperview()}
         ImageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
     }
-    
     @IBAction func CameraButton(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -44,35 +70,38 @@ class ViewController: UIViewController {
     }
     
     func recognizeText(image:UIImage?){
+        
         guard let cgimage = image?.cgImage else{return}
+        
         
         let handler = VNImageRequestHandler(cgImage: cgimage, options: [:])
         
-        let request = VNDetectTextRectanglesRequest{ request , error in
-            guard let observations = request.results as? [VNTextObservation],
-                  error == nil else{ return }
-            //print(self.ImageView.layer.sublayers)
-            observations .forEach({ observation in
-                let nRect = self.normalise(observation: observation)
-                self.drawRect(overlayLayer: self.overlayLayer, nRect: nRect)
-                //print(self.ImageView.layer.sublayers)
-            })
+        let rRequest = VNRecognizeTextRequest{ rRequest , error in
             
+            guard let rObservations = rRequest.results as? [VNRecognizedTextObservation],
+                  error == nil else {return}
+            
+            for observation in rObservations {
+                guard let text = observation.topCandidates(1).first?.string else{ return }
+                //rText.append(text)
+                if self.validCharacters.isSuperset(of: text){
+                    let nRect = self.normalise(observation: observation)
+                    self.drawRect(overlayLayer: self.overlayLayer, nRect: nRect, bValue: text)
+                }
             }
-        
-        
-        
-       
+            //print(rText)
             
+        }
+        
         do{
-            try handler.perform([request])
+            try handler.perform([rRequest])
         }catch{
             print(error)
         }
         
     }
     
-    func normalise(observation: VNTextObservation)->CGRect{
+    func normalise(observation: VNRecognizedTextObservation)->CGRect{
         
         return CGRect(
             x: observation.boundingBox.origin.x,
@@ -83,28 +112,48 @@ class ViewController: UIViewController {
         
     }
     
-    func drawRect(overlayLayer: CALayer, nRect: CGRect) {
+    func drawRect(overlayLayer: CALayer, nRect: CGRect, bValue:String) {
         let x = nRect.origin.x * ImageView.layer.frame.size.width
         let y = nRect.origin.y * imageH + (0.4 * (view.layer.frame.height-imageH))
         let width = nRect.width * ImageView.layer.frame.size.width
         let height = nRect.height * ImageView.layer.frame.size.height
 
-        print(x)
-        print(y)
+
           let outline = CALayer()
           outline.frame = CGRect(x: x, y: y, width: width, height: height).scaleUp(scaleUp: 0.1)
           outline.borderWidth = 2.0
           outline.borderColor = UIColor.red.cgColor
-        //print(outline)
-        //print (outline)
+        let button = UIButton(frame: CGRect(x: x, y: y, width: width, height: height))
+        //button.setTitle("button1", for: .normal)
+        button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+        button.accessibilityLabel = bValue
 
         ImageView.layer.addSublayer(outline)
         
+        ImageView.addSubview(button)
+        //print(ImageView.layer.sublayers?.count)
+        ImageView.isUserInteractionEnabled = true
     }
     
+    @objc func buttonClicked(sender:UIButton!){
+        print(sender.accessibilityLabel!)
+        guard let buttonVal = sender.accessibilityLabel else {return}
+        let expression = Expression(buttonVal)
+        let result = try? expression.evaluate()
+        guard let answer = result else{return}
+        displayLabel.text = String(answer)
+        displayAll.text = buttonVal
+        hideImageV()
+        ExplainButton.isHidden = false
+        ExplainButton.isEnabled = true
+    }
     
     @IBAction func Numbers(_ sender: UIButton) {
         
+        if(ExplainButton.isEnabled == true){
+            ExplainButton.isHidden = true
+            ExplainButton.isEnabled = false
+        }
         if calculated == true{
             value = 0
             displayLabel.text = "0"
@@ -148,6 +197,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttons(_ sender: UIButton) {
+        
+        if(ExplainButton.isEnabled == true){
+            ExplainButton.isHidden = true
+            ExplainButton.isEnabled = false
+        }
         if displayLabel.text != "" && sender.tag != 11 && sender.tag != 16{
             if calculated{
                 calculated = false
@@ -211,6 +265,8 @@ class ViewController: UIViewController {
                 }
                 calculated = true;
                 first = false
+                ExplainButton.isEnabled = true
+                ExplainButton.isHidden = false
             }
             
                 
@@ -235,7 +291,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        cancelbutton.isHidden = true
+        ExplainButton.isEnabled = false
+        ExplainButton.isHidden = true
         view.layer.addSublayer(overlayLayer)
     }
 
@@ -265,6 +323,7 @@ extension ViewController:UIImagePickerControllerDelegate, UINavigationController
         ImageView.image = image
         ImageView.isHidden = false
         cancelbutton.isEnabled = true
+        cancelbutton.isHidden = false
         everything.isHidden = true
         recognizeText(image: image)
         print("image acquired")

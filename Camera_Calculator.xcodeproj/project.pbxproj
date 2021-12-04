@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1B15B8B4767856D43712C1 /* libPods-Camera_Calculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6A267B9B6BFEBCDC82D275 /* libPods-Camera_Calculator.a */; };
 		F081B76B2742A962007DB34E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B76A2742A962007DB34E /* AppDelegate.swift */; };
 		F081B76D2742A962007DB34E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B76C2742A962007DB34E /* SceneDelegate.swift */; };
 		F081B76F2742A962007DB34E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B76E2742A962007DB34E /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 		F081B7822742A963007DB34E /* Camera_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B7812742A963007DB34E /* Camera_CalculatorTests.swift */; };
 		F081B78C2742A963007DB34E /* Camera_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B78B2742A963007DB34E /* Camera_CalculatorUITests.swift */; };
 		F081B78E2742A963007DB34E /* Camera_CalculatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081B78D2742A963007DB34E /* Camera_CalculatorUITestsLaunchTests.swift */; };
+		F08662CF27560B6400A5F7E0 /* ExplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08662CE27560B6400A5F7E0 /* ExplainViewController.swift */; };
+		F08662D127561DB000A5F7E0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08662D027561DB000A5F7E0 /* Stack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38FCAE415DB60CAB9774FA02 /* Pods-Camera_Calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camera_Calculator.release.xcconfig"; path = "Target Support Files/Pods-Camera_Calculator/Pods-Camera_Calculator.release.xcconfig"; sourceTree = "<group>"; };
+		60839255130438D150293A2A /* Pods-Camera_Calculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Camera_Calculator.debug.xcconfig"; path = "Target Support Files/Pods-Camera_Calculator/Pods-Camera_Calculator.debug.xcconfig"; sourceTree = "<group>"; };
 		F081B7672742A962007DB34E /* Camera_Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Camera_Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F081B76A2742A962007DB34E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F081B76C2742A962007DB34E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +54,9 @@
 		F081B7872742A963007DB34E /* Camera_CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Camera_CalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F081B78B2742A963007DB34E /* Camera_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera_CalculatorUITests.swift; sourceTree = "<group>"; };
 		F081B78D2742A963007DB34E /* Camera_CalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera_CalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F08662CE27560B6400A5F7E0 /* ExplainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainViewController.swift; sourceTree = "<group>"; };
+		F08662D027561DB000A5F7E0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		FA6A267B9B6BFEBCDC82D275 /* libPods-Camera_Calculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Camera_Calculator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1B15B8B4767856D43712C1 /* libPods-Camera_Calculator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B7AC19EDDA94A495B31062E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				60839255130438D150293A2A /* Pods-Camera_Calculator.debug.xcconfig */,
+				38FCAE415DB60CAB9774FA02 /* Pods-Camera_Calculator.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D41FE08B457C7FF4EFDD6F8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA6A267B9B6BFEBCDC82D275 /* libPods-Camera_Calculator.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F081B75E2742A962007DB34E = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +109,8 @@
 				F081B7802742A963007DB34E /* Camera_CalculatorTests */,
 				F081B78A2742A963007DB34E /* Camera_CalculatorUITests */,
 				F081B7682742A962007DB34E /* Products */,
+				D41FE08B457C7FF4EFDD6F8B /* Frameworks */,
+				B7AC19EDDA94A495B31062E4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +134,8 @@
 				F081B7732742A963007DB34E /* Assets.xcassets */,
 				F081B7752742A963007DB34E /* LaunchScreen.storyboard */,
 				F081B7782742A963007DB34E /* Info.plist */,
+				F08662CE27560B6400A5F7E0 /* ExplainViewController.swift */,
+				F08662D027561DB000A5F7E0 /* Stack.swift */,
 			);
 			path = Camera_Calculator;
 			sourceTree = "<group>";
@@ -134,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F081B7912742A963007DB34E /* Build configuration list for PBXNativeTarget "Camera_Calculator" */;
 			buildPhases = (
+				FBF36DC6702D1AC55149EBDD /* [CP] Check Pods Manifest.lock */,
 				F081B7632742A962007DB34E /* Sources */,
 				F081B7642742A962007DB34E /* Frameworks */,
 				F081B7652742A962007DB34E /* Resources */,
@@ -253,13 +284,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FBF36DC6702D1AC55149EBDD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Camera_Calculator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F081B7632742A962007DB34E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F081B76F2742A962007DB34E /* ViewController.swift in Sources */,
+				F08662D127561DB000A5F7E0 /* Stack.swift in Sources */,
 				F081B76B2742A962007DB34E /* AppDelegate.swift in Sources */,
+				F08662CF27560B6400A5F7E0 /* ExplainViewController.swift in Sources */,
 				F081B76D2742A962007DB34E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +492,7 @@
 		};
 		F081B7922742A963007DB34E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60839255130438D150293A2A /* Pods-Camera_Calculator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -461,6 +520,7 @@
 		};
 		F081B7932742A963007DB34E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38FCAE415DB60CAB9774FA02 /* Pods-Camera_Calculator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
